@@ -6,7 +6,7 @@ import duke.ui.Ui;
 /**
  * Class representing a command to show the help message.
  */
-public class HelpCommand extends Command{
+public class HelpCommand extends Command {
     /**
      * Executes this command on the given task list and user interface.
      *

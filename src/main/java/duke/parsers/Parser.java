@@ -29,7 +29,7 @@ public class Parser {
      */
     public static Command parse(String userInput) throws DukeException {
         String commandWord = getCommandWord(userInput);
-        switch (commandWord.toLowerCase()) {
+        switch (commandWord) {
         case "bye":
             return new ExitCommand();
         case "todo":
@@ -58,6 +58,8 @@ public class Parser {
             return new RescheduleCommand(ParserUtil.getSafeIndex(userInput), ParserUtil.getScheduleDate(userInput));
         case "repeat":
             return new AddCommand(ParserUtil.createRecurringTask(userInput));
+        case "fixed":
+            return new AddCommand(ParserUtil.createFixed(userInput));
         case "help":
             return new HelpCommand();
         default:
