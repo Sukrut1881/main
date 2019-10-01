@@ -17,8 +17,8 @@ class DeleteCommandTest {
         UiStub ui = new UiStub(new VBox());
         Storage storage = new Storage("tasks.txt", ui);
         Task task = new Todo("homework");
-        DeleteCommand DeleteCommand = new DeleteCommand(0);
-        DeleteCommand.execute(ui, storage);
+        DeleteCommand deleteCommand = new DeleteCommand(0);
+        deleteCommand.execute(ui, storage);
         assertTrue(!storage.getTasks().contains(task));
     }
 }
