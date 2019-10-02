@@ -64,7 +64,7 @@ public class Parser {
             return new AddCommand(ParserUtil.createFixed(userInput));
         case "help":
             return new HelpCommand();
-        case "test":
+        case "search":
             return new LocationSearchCommand(getWord(userInput));
         default:
             throw new DukeException(MessageUtil.UNKNOWN_COMMAND);
