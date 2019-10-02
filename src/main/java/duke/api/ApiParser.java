@@ -21,13 +21,9 @@ public class ApiParser {
      */
     public static ArrayList<String> getLocationSearch(String param) throws IOException, DukeException {
         ArrayList<String> result = new ArrayList<>();
-        System.out.println("sending req");
         LocationSearchUrlReq req = new LocationSearchUrlReq("https://developers.onemap.sg/commonapi/search?",
                 param);
         JsonObject jsonRes = req.execute();
-
-        //System.out.println(jsonRes.getAsJsonArray("results"));
-        System.out.println(Integer.valueOf(String.valueOf(jsonRes.getAsJsonPrimitive("found"))));
 
         JsonArray arr = jsonRes.getAsJsonArray("results");
         for (int i = 0; i < Integer.valueOf(String.valueOf(jsonRes.getAsJsonPrimitive("found")))

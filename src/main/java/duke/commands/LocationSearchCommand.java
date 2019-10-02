@@ -11,13 +11,6 @@ import java.util.ArrayList;
 
 import com.google.gson.JsonObject;
 
-/*
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-
- */
 /**
  * Class representing a command to send the test URL connection.
  */
