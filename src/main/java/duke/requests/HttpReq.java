@@ -1,4 +1,4 @@
-package duke.api_req;
+package duke.requests;
 
 import duke.commons.DukeException;
 

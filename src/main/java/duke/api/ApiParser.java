@@ -1,11 +1,10 @@
 package duke.api;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
-import duke.api_req.LocationSearchUrlReq;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import duke.requests.LocationSearchUrlReq;
 import duke.commons.DukeException;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,18 +19,22 @@ public class ApiParser {
      * @param param The query
      * @return result The locations found
      */
-    public static ArrayList<String> GetLocationSearch(String param) throws JSONException, IOException, DukeException {
+    public static ArrayList<String> getLocationSearch(String param) throws IOException, DukeException {
         ArrayList<String> result = new ArrayList<>();
-
+        System.out.println("sending req");
         LocationSearchUrlReq req = new LocationSearchUrlReq("https://developers.onemap.sg/commonapi/search?",
                 param);
-        JSONObject jsonRes = req.execute();
+        JsonObject jsonRes = req.execute();
 
-        JSONArray jsonResult = (JSONArray) jsonRes.get("results");
+        //System.out.println(jsonRes.getAsJsonArray("results"));
+        System.out.println(Integer.valueOf(String.valueOf(jsonRes.getAsJsonPrimitive("found"))));
 
-        for (int i = 0; i < (int) jsonRes.get("found") && i < 5; i++) {
-            result.add(jsonResult.getJSONObject(i).get("BUILDING") + ", " + jsonResult.getJSONObject(i).get("LATITUDE")
-                    + ", " + jsonResult.getJSONObject(i).get("LONGITUDE"));
+        JsonArray arr = jsonRes.getAsJsonArray("results");
+        for (int i = 0; i < Integer.valueOf(String.valueOf(jsonRes.getAsJsonPrimitive("found")))
+                && i < 5; i++) {
+            result.add(arr.get(i).getAsJsonObject().get("SEARCHVAL").getAsString() + " ("
+                + arr.get(i).getAsJsonObject().get("LATITUDE").getAsString() + " : "
+                + arr.get(i).getAsJsonObject().get("LONGITUDE").getAsString() + ")");
         }
 
         return result;
